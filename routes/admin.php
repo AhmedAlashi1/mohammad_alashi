@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ExaminationController;
 use App\Http\Controllers\Admin\PaymentsController;
+use App\Http\Controllers\Admin\BackupController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -51,7 +52,7 @@ Route::prefix(LaravelLocalization::setLocale() . '/admin')->middleware(['web'])
             Route::resource('payments', PaymentsController::class);
 
 
-
+            Route::get('backup/download', [BackupController::class, 'backupAndDownload'])->name('backup.download');
 
             });
         });
