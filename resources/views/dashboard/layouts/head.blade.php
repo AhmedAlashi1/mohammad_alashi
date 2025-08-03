@@ -215,34 +215,33 @@
     </style>
     <style>
         .swal2-popup.swal2-gold-shadow {
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2) !important;
-            border: 1px solid rgba(212, 175, 55, 0.15) !important;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2) !important;
+            border: 1px solid rgba(0, 123, 255, 0.15) !important;
             border-radius: 10px !important;
         }
 
         .swal2-icon.swal2-success.swal2-gold-icon {
-            color: #D4AF37 !important;
+            color: #007BFF !important;
         }
 
         .swal2-timer-progress.swal2-gold-progress {
-            background-color: #D4AF37 !important;
-        }
-        .swal2-icon.swal2-success.swal2-gold-icon .swal2-success-ring {
-            border-color: #D4AF37 !important; /* ذهبي */
+            background-color: #007BFF !important;
         }
 
-        /* غيّر لون إشارة الصح نفسها */
+        .swal2-icon.swal2-success.swal2-gold-icon .swal2-success-ring {
+            border-color: #007BFF !important;
+        }
+
         .swal2-icon.swal2-success.swal2-gold-icon .swal2-success-line-tip,
         .swal2-icon.swal2-success.swal2-gold-icon .swal2-success-line-long {
-            background-color: #D4AF37 !important; /* ذهبي */
+            background-color: #007BFF !important;
         }
 
         .swal2-timer-progress-bar {
-            background-color: #D4AF37 !important; /* ذهبي */
+            background-color: #007BFF !important;
         }
-
-
     </style>
+
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
 
 

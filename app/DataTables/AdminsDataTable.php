@@ -30,6 +30,7 @@ class AdminsDataTable extends DataTable
                 if ($admin->id == 1) {
                     return view('components.datatable.actions', [
                         'id' => $admin->id,
+                        'nameUrl' => 'admin',
                         'routeEdit' => 'admin.admins.edit',
                         'name' => App::getLocale() === 'ar' ? $admin->name_ar : $admin->name_en,
                     ]);
@@ -37,6 +38,7 @@ class AdminsDataTable extends DataTable
 
                 return view('components.datatable.actions', [
                     'id' => $admin->id,
+                    'nameUrl' => 'admin',
                     'routeEdit' => 'admin.admins.edit',
                     'routeDelete' => 'admin.admins.destroy',
                     'name' => App::getLocale() === 'ar' ? $admin->name_ar : $admin->name_en,

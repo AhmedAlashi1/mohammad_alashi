@@ -63,7 +63,7 @@
                             timer: 2500,
                             timerProgressBar: true,
                             background: '#ffffff',
-                            color: '#3e2f1c',
+                            color: '#4A90E2',
                             customClass: {
                                 popup: 'swal2-gold-shadow',
                                 icon: 'swal2-gold-icon',
@@ -87,7 +87,7 @@
                 timer: 2500,
                 timerProgressBar: true,
                 background: '#ffffff',
-                color: '#3e2f1c',
+                color: '#4A90E2',
                 customClass: {
                     popup: 'swal2-gold-shadow',
                     icon: 'swal2-gold-icon',
@@ -107,7 +107,7 @@
                 timer: 2500,
                 timerProgressBar: true,
                 background: '#ffffff',
-                color: '#3e2f1c',
+                color: '#4A90E2',
                 customClass: {
                     popup: 'swal2-gold-shadow',
                     icon: 'swal2-gold-icon',

@@ -9,9 +9,9 @@
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>{{__('Login Page - Shottar Dashboard')}}</title>
+    <title>{{__('Login Page - Mohammad Alashi Dashboard')}}</title>
     <link rel="apple-touch-icon" href="{{ URL::asset('dashboard/icon/Group.svg') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('dashboard/icon/Group.svg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::asset('logo.jpg') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -57,13 +57,13 @@
                         <div class="card-body">
                             <a href="javascript:void(0);" class="brand-logo d-flex align-items-center text-decoration-none">
                                 <div class="text-center">
-                                    <img src="{{ asset('logo.png') }}" height="60" alt="Logo" class="mb-1">
+                                    <img src="{{ asset('logo.jpg') }}" height="60" alt="Logo" class="mb-1">
 {{--                                    <h2 class="brand-text text-primary mb-0">{{ __('USell') }}</h2>--}}
                                 </div>
                             </a>
 
-                            <h4 class="card-title mb-1">{{__('Welcome to Shottar!')}} 👋</h4>
-                            <p class="card-text mb-2">{{ __('auth.description_admin') }}</p>
+                            <h4 class="card-title mb-1">{{__('Welcome to D.Mohammad Alashi!')}} 👋</h4>
+                            <p class="card-text mb-2">{{ __('Admin Login - Vision Therapy System') }}</p>
 
 
                             <form class="auth-login-form mt-2" method="POST" action="{{ route($prefix .'.login') }}" onsubmit="disableButton()">

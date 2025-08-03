@@ -63,28 +63,34 @@
         color: white !important;
     }
     .bg-menu-theme.menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) {
-        /*background: linear-gradient(270deg, rgba(115, 103, 240, 0.7) 0%, #7367f0 100%);*/
-        /*background: linear-gradient(270deg, rgba(154, 114, 87, 0.7) 0%, #9A7257 100%);*/
-        /*background: linear-gradient(270deg, rgba(154, 114, 87, 0.3) 0%, #9A7257 100%);*/
-        background: linear-gradient(270deg, #C5A87D 0%, #9A7257 100%);
-        /*box-shadow: 0 0 10px 1px rgba(115, 103, 240, 0.7);*/
-        box-shadow: 0 0 10px 1px rgba(154, 114, 87, 0.7);
+        background: linear-gradient(270deg, #4A90E2 0%, #007BFF 100%);
+        box-shadow: 0 0 10px 1px rgba(0, 123, 255, 0.7);
         color: #fff !important;
-    }
-    .page-item.active .page-link, .page-item.active .page-link:hover, .page-item.active .page-link:focus, .pagination li.active > a:not(.page-link), .pagination li.active > a:not(.page-link):hover, .pagination li.active > a:not(.page-link):focus {
-        background-color: #9A7257 !important;
-        border-color: #9A7257 !important;
-        color: #fff !important;
-    }
-    .btn-primary{
-        background-color: #9A7257 !important;
-        border-color: #9A7257 !important;
     }
 
-    .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-        background-color: #C5A87D !important;
-        border-color: #C5A87D !important;
+    .page-item.active .page-link,
+    .page-item.active .page-link:hover,
+    .page-item.active .page-link:focus,
+    .pagination li.active > a:not(.page-link),
+    .pagination li.active > a:not(.page-link):hover,
+    .pagination li.active > a:not(.page-link):focus {
+        background-color: #007BFF !important;
+        border-color: #007BFF !important;
+        color: #fff !important;
     }
+
+    .btn-primary {
+        background-color: #007BFF !important;
+        border-color: #007BFF !important;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: #4A90E2 !important;
+        border-color: #4A90E2 !important;
+    }
+
 
 
 </style>

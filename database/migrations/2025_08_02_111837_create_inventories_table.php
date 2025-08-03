@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->nullable();
-            $table->string('phone2')->nullable();
-            $table->integer('age')->nullable();
-            $table->date('date_of_birth')->nullable();
-            $table->enum('gender', ['male', 'female'])->default('male');
+            $table->string('description'); // وصف المنتج
+            $table->string('code')->unique(); // كود فريد
+            $table->decimal('purchase_price', 10, 2); // سعر الشراء
+            $table->integer('quantity')->default(1); // الكمية الافتراضية 1
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('inventories');
     }
 };

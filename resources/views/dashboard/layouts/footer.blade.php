@@ -11,7 +11,7 @@
                           document.write(new Date().getFullYear());
                       </script>
                       ❤️
-                      <a href="{{url('/')}}" target="_blank" class="footer-link">USELL </a>
+                      <a href="{{url('/')}}" target="_blank" class="footer-link">D.Mohammad Alashi </a>
                   </div>
                   <div class="d-none d-lg-inline-block">
 {{--                    <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank"--}}

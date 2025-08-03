@@ -20,21 +20,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
         'phone',
-        'image',
-        'password',
-        'address',
-        'status',
-        'activation_code',
-        'resend_code_count',
-        'device_token',
-        'device_type',
-        'remember_token',
-        'country_code',
-        'phone_not_code',
-        'language',
-        'notification_enabled'
+        'phone2',
+        'age',
+        'date_of_birth',
+        'gender',
         ];
 
     /**
@@ -69,16 +59,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    //orders
-    public function orders()
+    //examinations
+    public function examinations()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Examination::class);
     }
 
-    //notifications
-//    public function notifications()
-//    {
-//        return $this->hasMany(Notification::class);
-//    }
+
 
 }

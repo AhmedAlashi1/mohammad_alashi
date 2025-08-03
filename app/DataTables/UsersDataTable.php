@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Models\School;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Yajra\DataTables\Services\DataTable;
@@ -15,18 +14,15 @@ class UsersDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($user) {
-                $auth = auth('admin')->check() ? 'admin' : 'school';
-
                 $viewData = [
                     'id' => $user->id,
                     'name' => $user->name,
-                ];
+                    'nameUrl' => 'user'
 
-                if ($auth === 'admin') {
+                ];
                     $viewData['routeEdit'] = 'admin.users.edit';
                     $viewData['routeDelete'] = 'admin.users.destroy';
-                }
-
+                    $viewData['routeExaminations'] = 'admin.users.examinations';
                 return view('components.datatable.actions', $viewData);
 
             })
@@ -34,15 +30,27 @@ class UsersDataTable extends DataTable
             ->addColumn('created_at', function ($user) {
                 return $user->created_at->format('Y-m-d H:i');
             })
+            ->addColumn('gender', function ($user) {
+                $label = $user->gender === 'male'
+                    ? '<span class="badge"style="background-color:#119bfa;" >Male</span>'
+                    : '<span class="badge" style="background-color:#f472b6;">Female</span>';
+                return $label;
+            })
             //status 1 == active 2 == pending 0 == inactive
             ->addColumn('status', function ($user) {
                 return $user->status == 1 ? __('dataTable.active') : ($user->status == 2 ? __('dataTable.pending') : __('dataTable.inactive'));
             })
-            //children_count
+            ->filter(function ($query) {
+                if (request()->has('search') && $search = request('search')['value']) {
+                    $query->where(function ($q) use ($search) {
+                        $q->where('name', 'like', "%{$search}%")
+                            ->orWhere('phone', 'like', "%{$search}%")
+                            ->orWhere('gender', 'like', "%{$search}%");
+                    });
+                }
+            })
 
-            //orders_count
-
-            ->rawColumns(['action', 'image']);
+            ->rawColumns(['action', 'gender']);
     }
 
     public function query(User $model)
@@ -66,11 +74,8 @@ class UsersDataTable extends DataTable
             Column::make('id')->title(__('dataTable.id')),
             Column::make('name')->title(__('dataTable.name')),
             Column::make('phone')->title(__('dataTable.phone')),
-            Column::make('email')->title(__('dataTable.email')),
-
-            Column::make('status')->title(__('dataTable.status')),
+            Column::make('gender')->title(__('gender')),
             Column::make('created_at')->title(__('dataTable.created_at')),
-
             Column::computed('action')->title(__('dataTable.action'))->exportable(false)->printable(false),
         ];
     }

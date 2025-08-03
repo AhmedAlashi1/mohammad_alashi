@@ -1,67 +1,150 @@
-
 @extends('dashboard.layouts.master')
-@section('title', __('general.Update User') )
+@section('title', 'Edit Patient')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('dashboard/app-assets/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('dashboard/app-assets/css/bootstrap-extended.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('dashboard/app-assets/css/components.css') }}">
-
-
 @endsection
+
 @section('content')
-
-
     <section id="multiple-column-form">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{__('general.Update User')}} </h4>
+                        <h4 class="card-title">Edit Patient</h4>
                     </div>
                     <div class="card-body">
-                        <form class="form" action="{{ route('admin.users.update', $user->id) }}" method="post" enctype="multipart/form-data">
-                            @method('PUT')
+                        <form class="form" action="{{ route('admin.users.update', $user->id) }}" method="post">
                             @csrf
+                            @method('PUT')
                             <div class="row">
 
-                                <!-- Status -->
-                                <div class="col-md-12 col-12">
+                                <!-- Name -->
+                                <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label class="col-form-label-sm" for="status">{{__('general.Status')}}</label>
-                                        <select
-                                            name="status"
-                                            id="status"
-                                            class="form-control form-control-sm @error('status') is-invalid @else {{ old('status') ? 'is-valid' : '' }} @enderror"
+                                        <label class="col-form-label-sm" for="name">Full Name</label>
+                                        <input
+                                            value="{{ old('name', $user->name) }}"
+                                            name="name"
+                                            type="text"
+                                            id="name"
+                                            class="form-control form-control-sm @error('name') is-invalid @else {{ old('name') ? 'is-valid' : '' }} @enderror"
+                                            placeholder="Patient's Full Name"
                                             required
-                                        >
-                                            <option value="1" {{ old('status', $user->status ?? '') == 1 ? 'selected' : '' }}>{{ __('general.Active') }}</option>
-{{--                                            <option value="2" {{ old('status', $user->status ?? '') == 2 ? 'selected' : '' }}>{{ __('general.Pending') }}</option>--}}
-                                            <option value="0" {{ old('status', $user->status ?? '') == 3 ? 'selected' : '' }}>{{ __('general.Inactive') }}</option>
-                                        </select>
-                                        @error('status')
+                                        />
+                                        @error('name')
                                         <span class="col-form-label-sm text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
 
-                                <!-- Submit -->
-                                <div class="col-12">
+                                <!-- Phone 1 -->
+                                <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">{{ __('general.Update') }}</button>
+                                        <label class="col-form-label-sm" for="phone">Phone Number</label>
+                                        <input
+                                            value="{{ old('phone', $user->phone) }}"
+                                            name="phone"
+                                            type="text"
+                                            id="phone"
+                                            class="form-control form-control-sm @error('phone') is-invalid @else {{ old('phone') ? 'is-valid' : '' }} @enderror"
+                                            placeholder="Primary Phone Number"
+                                            required
+                                        />
+                                        @error('phone')
+                                        <span class="col-form-label-sm text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
+
+                                <!-- Phone 2 -->
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label-sm" for="phone2">Alternate Phone</label>
+                                        <input
+                                            value="{{ old('phone2', $user->phone2) }}"
+                                            name="phone2"
+                                            type="text"
+                                            id="phone2"
+                                            class="form-control form-control-sm @error('phone2') is-invalid @else {{ old('phone2') ? 'is-valid' : '' }} @enderror"
+                                            placeholder="Secondary Phone Number"
+                                        />
+                                        @error('phone2')
+                                        <span class="col-form-label-sm text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Age -->
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label-sm" for="age">Age</label>
+                                        <input
+                                            value="{{ old('age', $user->age) }}"
+                                            name="age"
+                                            type="number"
+                                            id="age"
+                                            class="form-control form-control-sm @error('age') is-invalid @else {{ old('age') ? 'is-valid' : '' }} @enderror"
+                                            placeholder="Patient's Age"
+                                        />
+                                        @error('age')
+                                        <span class="col-form-label-sm text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Date of Birth -->
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label-sm" for="date_of_birth">Date of Birth</label>
+                                        <input
+                                            value="{{ old('date_of_birth', $user->date_of_birth) }}"
+                                            name="date_of_birth"
+                                            type="date"
+                                            id="date_of_birth"
+                                            class="form-control form-control-sm @error('date_of_birth') is-invalid @else {{ old('date_of_birth') ? 'is-valid' : '' }} @enderror"
+                                        />
+                                        @error('date_of_birth')
+                                        <span class="col-form-label-sm text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Gender -->
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label-sm" for="gender">Gender</label>
+                                        <select
+                                            name="gender"
+                                            id="gender"
+                                            class="form-control form-control-sm @error('gender') is-invalid @else {{ old('gender') ? 'is-valid' : '' }} @enderror"
+                                            required
+                                        >
+                                            <option value="male" {{ old('gender', $user->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                                            <option value="female" {{ old('gender', $user->gender) == 'female' ? 'selected' : '' }}>Female</option>
+                                        </select>
+                                        @error('gender')
+                                        <span class="col-form-label-sm text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Update Patient</button>
+                                    </div>
+                                </div>
+
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-
 @endsection
 
 @section('js')
 @endsection
-

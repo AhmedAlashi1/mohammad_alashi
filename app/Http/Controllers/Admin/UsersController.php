@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\AdminsDataTable;
 use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,6 +18,20 @@ class UsersController extends Controller
     {
         return $dataTable->render('dashboard.admin.users.index');
     }
+    //create
+    public function create()
+    {
+        return view('dashboard.admin.users.create');
+    }
+    //store
+    public function store(UserRequest $request)
+    {
+        $data = $request->validated();
+        User::create($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'Patient added successfully.');
+    }
+
     //edit
     public function edit($id)
     {
@@ -23,17 +39,16 @@ class UsersController extends Controller
         return view('dashboard.admin.users.edit', compact('user'));
     }
     //update
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-        session()->flash('success', __('messages.updated successfully.'));
-        return redirect()->route('admin.users.index');
+        $data = $request->validated();
+        $user->update($data);
+        return redirect()->route('admin.users.index')->with('success', 'Patient added successfully.');
+
     }
     //destroy
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
         return response()->json('success');
 
