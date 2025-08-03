@@ -52,7 +52,9 @@ Route::prefix(LaravelLocalization::setLocale() . '/admin')->middleware(['web'])
             Route::resource('payments', PaymentsController::class);
 
 
-            Route::get('backup/download', [BackupController::class, 'backupAndDownload'])->name('backup.download');
+//            Route::get('backup/download', [BackupController::class, 'backupAndDownload'])->name('backup.download');
+            Route::get('backup/create', [BackupController::class, 'createBackup'])->name('backup.create');
+            Route::get('backup/download', [BackupController::class, 'downloadLatestBackup'])->name('backup.download');
 
             });
         });

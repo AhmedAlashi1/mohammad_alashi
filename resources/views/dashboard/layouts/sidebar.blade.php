@@ -73,6 +73,26 @@
                     </a>
         </li>
 
+{{--        <li class="menu-item {{ Route::is('admin.backup.*') ? 'active' : '' }}">--}}
+{{--            <a href="{{ route('admin.backup.download') }}" class="menu-link"--}}
+{{--               download="backup-latest.zip"--}}
+{{--            >--}}
+{{--                <i class="menu-icon tf-icons ti ti-database"></i>--}}
+{{--                <div>{{__('Backup')}}</div>--}}
+{{--            </a>--}}
+{{--        </li>--}}
+
+{{--        <a href="{{ route('admin.backup.create') }}" class="btn btn-primary">--}}
+{{--            <i class="ti ti-database"></i> إنشاء نسخة احتياطية--}}
+{{--        </a>--}}
+
+{{--        <a href="{{ route('admin.backup.download') }}" class="btn btn-success">--}}
+{{--            <i class="ti ti-download"></i> تحميل النسخة الأخيرة--}}
+{{--        </a>--}}
+
+
+
+
 
     </ul>
 

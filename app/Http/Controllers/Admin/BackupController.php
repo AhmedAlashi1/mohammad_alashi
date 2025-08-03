@@ -11,20 +11,52 @@ class BackupController extends Controller
 {
     public function backupAndDownload()
     {
-        // تنفيذ الباك اب
+
         Artisan::call('backup:run --only-db');
 
-        // الحصول على أحدث ملف باك أب
-        $files = Storage::disk('local')->files('Laravel');
-        $latestBackup = end($files);
+        $disk = Storage::disk('local');
+        $files = $disk->allFiles('Laravel');
 
-        // التأكد من وجود الباك أب
-        if (!$latestBackup || !Storage::disk('local')->exists($latestBackup)) {
+        // ترتيب الملفات حسب التاريخ (الأحدث أولاً)
+        usort($files, function ($a, $b) use ($disk) {
+            return $disk->lastModified($b) - $disk->lastModified($a);
+        });
+
+        $latestBackup = $files[0] ?? null;
+
+        if (!$latestBackup || !$disk->exists($latestBackup)) {
             return redirect()->back()->with('error', 'Backup file not found!');
         }
+        dd($latestBackup);
 
-        // تنزيل الملف
-        return Storage::disk('local')->download($latestBackup);
+        $path = storage_path('app/' . $latestBackup);
+        $filename = basename($latestBackup);
+        return response()->download($path, $filename, [
+            'Content-Type' => 'application/zip',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
     }
-}
+    public function createBackup()
+    {
+        Artisan::call('backup:run --only-db');
+        return redirect()->back()->with('success', 'Backup created successfully.');
+    }
+
+    public function downloadLatestBackup()
+    {
+        $disk = Storage::disk('local');
+        $files = $disk->allFiles('Laravel');
+
+        usort($files, fn($a, $b) => $disk->lastModified($b) - $disk->lastModified($a));
+        $latestBackup = $files[0] ?? null;
+
+        if (!$latestBackup || !$disk->exists($latestBackup)) {
+            return response()->json(['error' => 'Backup file not found'], 404);
+        }
+
+        $path = storage_path('app/' . $latestBackup);
+
+        return response()->file($path); // لا تستخدم download
+    }
+
 }
