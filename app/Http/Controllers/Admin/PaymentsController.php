@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\PaymentsDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Examination;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -12,9 +13,8 @@ class PaymentsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(PaymentsDataTable $dataTable){
+        return $dataTable->render('dashboard.admin.payments.index');
     }
 
     /**
@@ -60,10 +60,7 @@ class PaymentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+
 
     public function indexByExamination(PaymentsDataTable $dataTable, Examination $examination)
     {
@@ -76,7 +73,7 @@ class PaymentsController extends Controller
         return view('dashboard.admin.payments.create', ['examination' => $examination]);
     }
     //storePayment
-public function storePayment(Request $request, Examination $examination)
+    public function storePayment(Request $request, Examination $examination)
     {
         $data = $request->validate([
             'amount' => 'required|numeric',
@@ -102,5 +99,31 @@ public function storePayment(Request $request, Examination $examination)
             'payment' => $payment,
         ]);
     }
+    //updatePayment
+    public function updatePayment(Request $request, Examination $examination, $paymentId)
+    {
+        $data = $request->validate([
+            'amount' => 'required|numeric',
+            'notes' => 'nullable|string',
+            'payment_type' => 'required|in:consultation,glasses',
+            'method' => 'required|in:cash,online',
+        ]);
+
+        $payment = $examination->payments()->findOrFail($paymentId);
+        $payment->update($data);
+
+        return redirect()->route('admin.examinations.payments', ['examination' => $examination])
+            ->with('success', __('Payment updated successfully.'));
+    }
+
+
+        public function destroy(Payment $payment)
+        {
+            $payment->delete();
+
+            return response()->json(['status' => true]);
+        }
+
+
 
 }

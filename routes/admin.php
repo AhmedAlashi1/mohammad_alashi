@@ -7,10 +7,6 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ExaminationController;
 use App\Http\Controllers\Admin\PaymentsController;
-use App\Http\Controllers\Admin\SemesterController;
-use App\Http\Controllers\Admin\SubjectController;
-use App\Http\Controllers\Admin\LessonSectionController;
-use App\Http\Controllers\Admin\CourseMaterialController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

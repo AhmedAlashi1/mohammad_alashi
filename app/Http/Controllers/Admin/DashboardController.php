@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Examination;
+use App\Models\Inventory;
+use App\Models\Payment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -12,8 +15,9 @@ class DashboardController extends Controller
     public function index(){
 
         $usersCount = User::count();
-//        $postsCount = Post::where('status', '1')->where('payment_status', '1')->count();
-//        $totalAmount = Post::where('status', '1')->where('payment_status', '1')->sum('paid_amount');
+        $inventoryCount = Inventory::count();
+        $paymentsSum = Payment::sum('amount');
+        $examinationsCount = Examination::count();
 
         $lastWeek = $this->getLastWeekLabels();
         $datasets = $this->generateDatasets($lastWeek);
@@ -61,7 +65,7 @@ class DashboardController extends Controller
 //        $menu = SideMenu::where('side_id',null)->with('side')->get();
 //        $sequences =SideMenu::where('side_id', null)->lazy();
 
-        return view('dashboard.dashboard',compact( 'lineChart','usersCount'));
+        return view('dashboard.dashboard',compact( 'lineChart','usersCount','inventoryCount', 'paymentsSum', 'examinationsCount'));
     }
 
     private function createChart($name, $type, $labels, $datasets, $options)
@@ -98,47 +102,47 @@ class DashboardController extends Controller
             $startDate = $day->copy()->startOfDay();
             $endDate = $day->copy()->endOfDay();
 
-            $customers = DB::table('users')
-                ->whereBetween('created_at', [$startDate, $endDate])
+
+
+            $examinationsCount = Examination::whereBetween('created_at', [$startDate, $endDate])
                 ->count();
-//            $postsCount = Post::where('payment_status', '1')
-//                ->whereBetween('created_at', [$startDate, $endDate])
-//                ->count();
+            $paymentsSum = Payment::whereBetween('created_at', [$startDate, $endDate])
+                 ->sum('amount');
 
 
-            $usersDataset[] = $customers;
-//            $postsDataset[] = $postsCount;
+            $examinationsDataset[] = $examinationsCount;
+            $paymentsSumDataset[] = $paymentsSum;
 
 
 
         }
 
         $datasets[] = [
-            "label" => __('users'),
+            "label" => __('Examination'),
             'backgroundColor' => "#0162e8",
             'borderColor' => "#0162e8",
             "pointBorderColor" => "#0162e8",
             "pointBackgroundColor" => "#fff",
             "pointHoverBackgroundColor" => "#fff",
             "pointHoverBorderColor" => "#0162e8",
-            'data' => $usersDataset,
+            'data' => $examinationsDataset,
             'fill'=> false,
             'tension'=> 0.3
         ];
 
-//        $datasets[] = [
-//            "label" => __('Posts'),
-//            'backgroundColor' => "#f95374",
-//            'borderColor' => "#f95374",
-//            "pointBorderColor" => "#f95374",
-//            "pointBackgroundColor" => "#fff",
-//            "pointHoverBackgroundColor" => "#fff",
-//            "pointHoverBorderColor" => "#f95374",
-//            'data' => $postsDataset,
-//            'fill'=> false,
-//            'tension'=> 0.3
-//        ];
-//
+        $datasets[] = [
+            "label" => __('Payments'),
+            'backgroundColor' => "#f95374",
+            'borderColor' => "#f95374",
+            "pointBorderColor" => "#f95374",
+            "pointBackgroundColor" => "#fff",
+            "pointHoverBackgroundColor" => "#fff",
+            "pointHoverBorderColor" => "#f95374",
+            'data' => $paymentsSumDataset,
+            'fill'=> false,
+            'tension'=> 0.3
+        ];
+
 //        $datasets[] = [
 //            "label" => __('Ios'),
 //            'backgroundColor' => "#4A90E2",

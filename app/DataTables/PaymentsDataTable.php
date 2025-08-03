@@ -25,7 +25,7 @@ class PaymentsDataTable extends DataTable
                     'name' => $payment->examination_id,
                     'nameUrl' => 'payments',
                     'routeEdit' => 'admin.examinations.payments.edit',
-                    'routeDelete' => 'admin.examinations.payments.destroy',
+                    'routeDelete' => 'admin.payments.destroy',
 
                     'routeParams' => [
                         'examination' => $payment->examination_id,
@@ -62,7 +62,7 @@ class PaymentsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('payments-datatable')
+            ->setTableId('datatable')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(0, 'desc')
